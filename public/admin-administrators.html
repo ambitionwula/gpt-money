@@ -17,20 +17,25 @@
       <div class="grid three admin-create"><label>登录账号<input id="adminAccount" autocomplete="off" placeholder="例如 support-01"></label><label>登录密码<input id="adminPassword" type="password" autocomplete="new-password" placeholder="至少 8 位"></label><label>确认密码<input id="adminConfirmPassword" type="password" autocomplete="new-password" placeholder="再次输入密码"></label></div>
       <div class="actions"><button id="createAdminBtn" class="primary">创建次级管理员</button><button id="refreshAdminBtn">刷新列表</button></div><p id="adminResult" class="result"></p>
     </section>
-    <section id="primaryPasswordCard" class="card">
-      <div class="section-title"><span class="step">P</span><div><h2>修改主管理员密码</h2><p>需要验证当前密码；修改成功后，其他设备上的登录会话将失效。</p></div></div>
-      <form id="primaryPasswordForm" class="profile-form">
-        <div class="grid three">
-          <label>当前密码<input id="primaryCurrentPassword" type="password" autocomplete="current-password" required></label>
-          <label>新密码<input id="primaryNewPassword" type="password" autocomplete="new-password" minlength="8" required></label>
-          <label>确认新密码<input id="primaryConfirmPassword" type="password" autocomplete="new-password" minlength="8" required></label>
-        </div>
-        <div class="actions"><button id="savePrimaryPasswordBtn" class="primary" type="submit">保存新密码</button></div>
-        <p id="primaryPasswordResult" class="result"></p>
-      </form>
-    </section>
     <section class="card"><div class="section-title"><span class="step">A</span><div><h2>管理员列表</h2><p>主管理员可修改自己的密码，但不可在此删除。</p></div></div><div id="adminRows" class="admin-list"><div class="empty-state">正在加载…</div></div></section>
+    <div id="primaryPasswordModal" class="modal-backdrop" hidden>
+      <section class="confirm-modal password-reset-modal" role="dialog" aria-modal="true" aria-labelledby="primaryPasswordTitle">
+        <button id="closePrimaryPasswordModal" class="modal-close-button" type="button" aria-label="关闭">×</button>
+        <div class="confirm-modal-icon">P</div>
+        <h2 id="primaryPasswordTitle">修改主管理员密码</h2>
+        <p class="confirm-modal-text">需要验证当前密码。修改成功后，其他设备上的登录会话将失效。</p>
+        <form id="primaryPasswordForm">
+          <div class="password-reset-fields">
+            <label>当前密码<input id="primaryCurrentPassword" type="password" autocomplete="current-password" required></label>
+            <label>新密码<input id="primaryNewPassword" type="password" autocomplete="new-password" minlength="8" required></label>
+            <label>确认新密码<input id="primaryConfirmPassword" type="password" autocomplete="new-password" minlength="8" required></label>
+          </div>
+          <p id="primaryPasswordResult" class="result"></p>
+          <div class="confirm-modal-actions"><button id="cancelPrimaryPasswordBtn" type="button">取消</button><button id="savePrimaryPasswordBtn" class="primary" type="submit">保存新密码</button></div>
+        </form>
+      </section>
+    </div>
   </main>
-  <script src="/auth-storage.js"></script><script src="/admin-auth.js"></script><script src="/admin-administrators.js?v=20261003-2"></script>
+  <script src="/auth-storage.js"></script><script src="/admin-auth.js"></script><script src="/admin-administrators.js?v=20261003-3"></script>
 </body>
 </html>
