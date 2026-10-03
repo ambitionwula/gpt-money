@@ -577,7 +577,7 @@ export const store = {
     db.prepare(`
       INSERT INTO users (id, role, admin_level, admin_active, password_hash, paid, paid_until, subscription_plan_id, max_mail_accounts, created_at)
       VALUES (?, 'admin', 'primary', 1, ?, 1, NULL, NULL, 1, ?)
-      ON CONFLICT(id) DO UPDATE SET role = 'admin', admin_level = 'primary', admin_active = 1, password_hash = excluded.password_hash
+      ON CONFLICT(id) DO UPDATE SET role = 'admin', admin_level = 'primary', admin_active = 1
     `).run(userId, passwordHash, now);
     return store.getUser(userId)!;
   },

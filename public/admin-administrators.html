@@ -17,8 +17,8 @@
       <div class="grid three admin-create"><label>登录账号<input id="adminAccount" autocomplete="off" placeholder="例如 support-01"></label><label>登录密码<input id="adminPassword" type="password" autocomplete="new-password" placeholder="至少 8 位"></label><label>确认密码<input id="adminConfirmPassword" type="password" autocomplete="new-password" placeholder="再次输入密码"></label></div>
       <div class="actions"><button id="createAdminBtn" class="primary">创建次级管理员</button><button id="refreshAdminBtn">刷新列表</button></div><p id="adminResult" class="result"></p>
     </section>
-    <section class="card"><div class="section-title"><span class="step">A</span><div><h2>管理员列表</h2><p>主管理员账号由环境变量维护，不可在此删除。</p></div></div><div id="adminRows" class="admin-list"><div class="empty-state">正在加载…</div></div></section>
+    <section class="card"><div class="section-title"><span class="step">A</span><div><h2>管理员列表</h2><p>主管理员可修改自己的密码，但不可在此删除。</p></div></div><div id="adminRows" class="admin-list"><div class="empty-state">正在加载…</div></div></section>
   </main>
-  <script src="/auth-storage.js"></script><script src="/admin-auth.js"></script><script src="/admin-administrators.js"></script>
+  <script src="/auth-storage.js"></script><script src="/admin-auth.js"></script><script src="/admin-administrators.js?v=20261003-1"></script>
 </body>
 </html>
