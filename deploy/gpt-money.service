@@ -1,0 +1,25 @@
+[Unit]
+Description=GPT Money Mail OTP Gateway
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/gpt-money
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=8807
+ExecStart=/usr/bin/node /opt/gpt-money/dist/server.js
+Restart=on-failure
+RestartSec=5
+User=www-data
+Group=www-data
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+ReadWritePaths=/opt/gpt-money/data
+
+[Install]
+WantedBy=multi-user.target

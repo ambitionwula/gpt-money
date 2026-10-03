@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>支付管理 - 共享拼单平台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div><p class="eyebrow">ADMIN CONSOLE</p><h1>支付管理</h1><p class="muted">配置在线支付网关、回调地址和商户信息。商户密钥只加密保存在服务端，不会回显。</p></div>
+    </header>
+    <nav class="admin-subnav" aria-label="管理员功能切换">
+      <a class="admin-subtab" href="/admin-users.html">用户管理</a>
+      <a class="admin-subtab" href="/admin-accounts.html">邮箱账号池</a>
+      <a class="admin-subtab" href="/admin-plans.html">付费套餐</a>
+      <a class="admin-subtab active" href="/admin-payment.html">支付管理</a>
+      <a class="admin-subtab" href="/admin-orders.html">订单管理</a>
+      <a class="admin-subtab" href="/admin-announcements.html">公告管理</a>
+      <a class="admin-subtab" href="/admin-support.html">客服中心</a>
+    </nav>
+    <section class="card">
+      <div class="section-title"><span class="step">￥</span><div><h2>在线支付配置</h2><p>先保存配置，确认回调地址可被支付平台访问后，再开启在线支付。</p></div></div>
+      <label class="check payment-enabled-toggle"><input id="paymentEnabled" type="checkbox"><span>启用在线支付</span></label>
+      <div class="grid three payment-settings-grid">
+        <label>支付方式<select id="paymentGatewayType"><option value="epay">易支付 / OpenAPI</option><option value="manual">人工确认</option></select></label>
+        <label>支付网关地址<input id="paymentGatewayUrl" type="url" placeholder="https://pay.example.com"></label>
+        <label>商户 ID<input id="paymentMerchantId" placeholder="商户编号 / pid"></label>
+        <label>商户密钥<input id="paymentMerchantKey" type="password" autocomplete="new-password" placeholder="首次填写；已配置可留空"></label>
+        <label>最低支付金额（元）<input id="paymentMinAmount" type="number" min="0.01" step="0.01" value="1.00"></label>
+        <label>支付完成返回地址<input id="paymentReturnUrl" type="url" placeholder="https://你的域名/"></label>
+        <label>回调根地址<input id="paymentCallbackBaseUrl" type="url" placeholder="https://你的域名"></label>
+      </div>
+      <div class="payment-callback-note"><strong>异步通知地址</strong><span>请将支付平台的异步通知地址设置为：<code>/api/payment/epay/notify</code>。系统已支持 GET / POST 回调、MD5 验签、订单号与金额校验，以及重复通知幂等处理。</span></div>
+      <div class="actions"><button id="savePaymentSettingsBtn" class="primary">保存支付配置</button><button id="refreshPaymentSettingsBtn">重新读取</button></div>
+      <p id="paymentSettingsResult" class="result"></p>
+    </section>
+  </main>
+  <script src="/auth-storage.js"></script>
+  <script src="/admin-auth.js"></script>
+  <script src="/admin-payment.js"></script>
+</body>
+</html>

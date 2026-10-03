@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>套餐与支付 - 共享拼单平台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <p class="eyebrow">LOCAL CONTROL PANEL</p>
+        <h1>套餐与支付</h1>
+        <div class="auth-status"><span id="authUserLabel">未登录</span><a id="authLoginLink" href="/auth.html">注册 / 登录</a><a id="profileLink" class="button-link" href="/profile.html" hidden>个人信息</a><button id="authLogoutBtn" type="button" hidden>退出登录</button></div>
+      </div>
+      <span id="healthBadge" class="badge pending">检测服务中</span>
+    </header>
+
+    <nav class="user-page-nav" aria-label="用户页面切换">
+      <a href="/" class="user-page-nav-link">账户与验证码</a>
+      <a href="/payment.html" class="user-page-nav-link active">套餐与支付</a>
+    </nav>
+
+    <section class="card payment-card">
+      <div class="section-title"><span class="step">$</span><div><h2>选择付费套餐</h2><p id="paymentPlanHint">套餐人数代表同一个邮箱账号允许共享的用户数量。</p></div></div>
+      <div id="paymentPlans" class="payment-plans"><div class="empty-inline">正在加载套餐…</div></div>
+      <div class="payment-summary"><span>当前状态</span><strong id="paymentStatus">检测中…</strong></div>
+      <div class="actions"><button id="createPaymentBtn" class="primary">立即支付</button></div>
+      <p id="paymentResult" class="result"></p>
+    </section>
+
+    <section class="card payment-help-card">
+      <div class="section-title"><span class="step">i</span><div><h2>支付说明</h2><p>一个用户同时只能订购一个有效套餐。当前套餐到期后，页面会重新显示全部可用套餐。</p></div></div>
+      <a class="back-link" href="/">返回账户与验证码</a>
+    </section>
+  </main>
+
+  <div id="paymentConfirmModal" class="modal-backdrop" hidden>
+    <div class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="paymentConfirmTitle">
+      <div class="confirm-modal-icon">$</div>
+      <h2 id="paymentConfirmTitle">确认创建套餐订单</h2>
+      <p id="paymentConfirmText" class="confirm-modal-text"></p>
+      <div class="confirm-modal-actions"><button id="cancelPaymentConfirmBtn" type="button">取消</button><button id="confirmPaymentBtn" type="button" class="primary">确认创建订单</button></div>
+    </div>
+  </div>
+  <script src="/auth-storage.js"></script>
+  <script src="/payment.js?v=20260929-3"></script>
+</body>
+</html>

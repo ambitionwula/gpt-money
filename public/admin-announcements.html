@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>公告管理 - 共享拼单平台</title><link rel="stylesheet" href="/styles.css"></head>
+<body><main class="shell">
+  <header><div><p class="eyebrow">ADMIN CONSOLE</p><h1>公告管理</h1><p class="muted">发布后，用户端会显示当前有效公告。</p></div></header>
+  <nav class="admin-subnav" aria-label="管理员功能切换"><a class="admin-subtab" href="/admin-users.html">用户管理</a><a class="admin-subtab" href="/admin-accounts.html">邮箱账号池</a><a class="admin-subtab" href="/admin-plans.html">付费套餐</a><a class="admin-subtab" href="/admin-payment.html">支付管理</a><a class="admin-subtab" href="/admin-orders.html">订单管理</a><a class="admin-subtab active" href="/admin-announcements.html">公告管理</a><a class="admin-subtab" href="/admin-support.html">客服中心</a></nav>
+  <section class="card"><div class="section-title"><span class="step">!</span><div><h2>发布公告</h2><p>公告内容会展示给所有用户，请不要填写敏感信息。</p></div></div>
+    <div class="grid two"><label>公告标题<input id="announcementTitle" maxlength="80" placeholder="例如：系统维护通知"></label><label>优先级<input id="announcementPriority" type="number" min="0" max="100" value="0"></label></div>
+    <label class="announcement-content-label">公告内容<textarea id="announcementContent" maxlength="3000" rows="5" placeholder="请输入公告内容"></textarea></label>
+    <div class="grid three"><label>开始展示<input id="announcementStartsAt" type="datetime-local"></label><label>结束展示（可选）<input id="announcementExpiresAt" type="datetime-local"></label><label class="check"><input id="announcementActive" type="checkbox" checked><span>立即启用</span></label></div>
+    <div class="actions"><button id="createAnnouncementBtn" class="primary">发布公告</button><button id="refreshAnnouncementsBtn">刷新列表</button></div><p id="announcementResult" class="result"></p>
+  </section>
+  <section class="card"><div class="section-title"><span class="step">L</span><div><h2>公告列表</h2><p>可以修改内容、展示时间、优先级，也可以停用或删除。</p></div></div><div id="announcementRows" class="announcement-admin-list"><div class="empty-state">正在加载…</div></div></section>
+</main><script src="/auth-storage.js"></script><script src="/admin-auth.js"></script><script src="/admin-announcements.js"></script></body></html>

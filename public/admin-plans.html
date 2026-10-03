@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>付费套餐 - 共享拼单平台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <p class="eyebrow">ADMIN CONSOLE</p>
+        <h1>付费套餐</h1>
+        <p class="muted">配置同一个邮箱账号允许共享的用户人数、价格和有效周期。</p>
+      </div>
+    </header>
+
+    <nav class="admin-subnav" aria-label="管理员功能切换">
+      <a class="admin-subtab" href="/admin-users.html">用户管理</a>
+      <a class="admin-subtab" href="/admin-accounts.html">邮箱账号池</a>
+      <a class="admin-subtab active" href="/admin-plans.html">付费套餐</a>
+      <a class="admin-subtab" href="/admin-payment.html">支付管理</a>
+      <a class="admin-subtab" href="/admin-orders.html">订单管理</a>
+      <a class="admin-subtab" href="/admin-announcements.html">公告管理</a>
+      <a class="admin-subtab" href="/admin-support.html">客服中心</a>
+    </nav>
+
+    <section class="card">
+      <div class="section-title"><span class="step">+</span><div><h2>创建套餐</h2><p>套餐人数用于匹配至少有对应共享容量的邮箱账号。</p></div></div>
+      <div class="grid three">
+        <label>套餐名称<input id="planName" type="text" placeholder="例如：5人套餐" maxlength="40"></label>
+        <label>实际共享人数<input id="planSeatCount" type="number" min="1" max="1000" value="1"></label>
+        <label>价格（元）<input id="planPrice" type="number" min="0.01" step="0.01" value="9.90"></label>
+      </div>
+      <div class="grid two plan-create-secondary">
+        <label>用户端显示人数<input id="planDisplaySeatCount" type="number" min="1" max="1000" value="1"></label>
+        <label>有效周期（天）<input id="planDurationDays" type="number" min="1" max="3650" value="30"></label>
+        <div class="identity-note">实际人数用于匹配邮箱容量；显示人数只展示给用户，两个数值可以不同。</div>
+      </div>
+      <div class="actions"><button id="createPlanBtn" class="primary">创建套餐</button><button id="refreshPlansBtn">刷新套餐</button></div>
+      <p id="planResult" class="result"></p>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><span class="step">P</span><div><h2>套餐列表</h2><p>可以分别修改实际共享人数、用户端显示人数、价格、周期和启用状态；已创建的订单会保留原套餐信息。</p></div></div>
+      <div id="planRows" class="plan-admin-list"><div class="empty-state">正在加载…</div></div>
+    </section>
+  </main>
+  <script src="/auth-storage.js"></script>
+  <script src="/admin-auth.js"></script>
+  <script src="/admin-plans.js"></script>
+</body>
+</html>

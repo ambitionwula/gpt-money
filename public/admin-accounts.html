@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>邮箱账号池 - 共享拼单平台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <p class="eyebrow">ADMIN CONSOLE</p>
+        <h1>邮箱账号池</h1>
+        <p class="muted">添加网易邮箱、维护共享容量并控制账号启停。</p>
+      </div>
+    </header>
+
+    <nav class="admin-subnav" aria-label="管理员功能切换">
+      <a class="admin-subtab" href="/admin-users.html">用户管理</a>
+      <a class="admin-subtab active" href="/admin-accounts.html">邮箱账号池</a>
+      <a class="admin-subtab" href="/admin-plans.html">付费套餐</a>
+      <a class="admin-subtab" href="/admin-payment.html">支付管理</a>
+      <a class="admin-subtab" href="/admin-orders.html">订单管理</a>
+      <a class="admin-subtab" href="/admin-announcements.html">公告管理</a>
+      <a class="admin-subtab" href="/admin-support.html">客服中心</a>
+    </nav>
+
+    <section class="card">
+      <div class="section-title"><span class="step">+</span><div><h2>添加邮箱账号</h2><p>客户端授权码用于 IMAP 获取验证码；邮箱登录密码仅在管理员授权后提供给用户。</p></div></div>
+      <div class="grid three account-create-grid">
+        <label>邮箱登录账号<input id="managedEmail" type="email" placeholder="admin-box@163.com"></label>
+        <label>客户端授权码<input id="managedPassword" type="password" placeholder="仅管理员输入" autocomplete="off"></label>
+        <label>邮箱登录密码<input id="managedLoginPassword" type="password" placeholder="可选，用于用户登录邮箱" autocomplete="new-password"></label>
+        <label>最大用户数<input id="managedMaxUsers" type="number" min="1" value="3"></label>
+        <label class="account-note-field">备注<input id="managedNote" type="text" maxlength="200" placeholder="例如：主账号、9月续费"></label>
+      </div>
+      <div class="actions"><button id="testManagedBtn">测试连接</button><button id="addManagedBtn" class="primary" disabled>添加到账号池</button><button id="refreshAccountsBtn">刷新账号池</button></div>
+      <p id="accountTestState" class="account-test-state">请先测试邮箱连接，测试成功后才能添加。</p>
+      <p id="accountResult" class="result"></p>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><span class="step">M</span><div><h2>账号列表</h2><p>查看分配情况、设置到期时间，并管理账号续费和启用状态。</p></div></div>
+      <div id="accountExpirySummary" class="account-expiry-summary">正在统计账号周期…</div>
+      <div class="account-batch-toolbar">
+        <div class="account-batch-head"><strong>批量修改</strong><span id="selectedAccountCount">已选择 0 个账号</span></div>
+        <div class="account-batch-fields">
+          <label>人数上限<input id="batchMaxUsers" type="number" min="1" max="1000" placeholder="不修改"></label>
+          <label>到期时间<input id="batchExpiresAt" type="datetime-local"></label>
+          <label>启停状态<select id="batchActive"><option value="">不修改</option><option value="true">统一启用</option><option value="false">统一停用</option></select></label>
+          <label>备注<input id="batchNote" type="text" maxlength="200" placeholder="不修改"></label>
+          <button id="batchUpdateBtn" class="primary" disabled>批量保存</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th><label class="select-all-label"><input id="selectAllAccounts" type="checkbox"> 全选</label></th><th>账号信息</th><th>已分配</th><th>人数上限</th><th>到期时间</th><th>状态</th><th>操作</th></tr></thead>
+          <tbody id="accountRows"><tr><td colspan="7">正在加载…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <div id="credentialModal" class="modal-backdrop" hidden>
+      <section class="confirm-modal credential-modal" role="dialog" aria-modal="true" aria-labelledby="credentialModalTitle">
+        <div class="confirm-modal-icon">🔐</div><h2 id="credentialModalTitle">邮箱账号密码</h2><p class="confirm-modal-text">仅主管理员可查看；密码按需从服务端解密，不会出现在账号列表接口中。</p>
+        <div class="credential-fields">
+          <label>邮箱账号<input id="credentialEmail" readonly></label>
+          <label>客户端授权码<div class="credential-input-row"><input id="credentialAppPassword" type="password" readonly><button type="button" data-toggle-credential="credentialAppPassword">显示</button><button type="button" data-copy-credential="credentialAppPassword">复制</button></div></label>
+          <label>邮箱登录密码<div class="credential-input-row"><input id="credentialLoginPassword" type="password" readonly><button type="button" data-toggle-credential="credentialLoginPassword">显示</button><button type="button" data-copy-credential="credentialLoginPassword">复制</button></div><small id="credentialLoginPasswordEmpty" class="muted" hidden>该账号尚未配置邮箱登录密码</small></label>
+        </div>
+        <div class="confirm-modal-actions"><button id="closeCredentialModal" type="button" class="primary">关闭</button></div>
+      </section>
+    </div>
+  </main>
+  <script src="/auth-storage.js"></script>
+  <script src="/admin-auth.js"></script>
+  <script src="/admin-accounts.js"></script>
+</body>
+</html>

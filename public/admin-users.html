@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>用户管理 - 共享拼单平台</title>
+  <link rel="stylesheet" href="/styles.css?v=20260930-2">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <p class="eyebrow">ADMIN CONSOLE</p>
+        <h1>用户管理</h1>
+        <p class="muted">管理用户订阅、到期时间、账号数量权限和邮箱分配。</p>
+      </div>
+    </header>
+
+    <nav class="admin-subnav" aria-label="管理员功能切换">
+      <a class="admin-subtab active" href="/admin-users.html">用户管理</a>
+      <a class="admin-subtab" href="/admin-accounts.html">邮箱账号池</a>
+      <a class="admin-subtab" href="/admin-plans.html">付费套餐</a>
+      <a class="admin-subtab" href="/admin-payment.html">支付管理</a>
+      <a class="admin-subtab" href="/admin-orders.html">订单管理</a>
+      <a class="admin-subtab" href="/admin-announcements.html">公告管理</a>
+      <a class="admin-subtab" href="/admin-support.html">客服中心</a>
+    </nav>
+
+    <section class="card">
+      <div class="section-title"><span class="step">+</span><div><h2>创建用户</h2><p class="admin-create-hint">新用户默认只有 1 个邮箱账号权限。</p></div></div>
+      <div class="grid two admin-create">
+        <label>新用户 ID<input id="newUserId" placeholder="例如 user-1001" autocomplete="off"></label>
+        <label class="check"><input id="newUserPaid" type="checkbox"><span>创建为付费用户</span></label>
+      </div>
+      <div class="actions"><button id="createUserBtn" class="primary">创建用户</button><button id="refreshAdminBtn">刷新列表</button></div>
+      <p id="adminResult" class="result"></p>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><span class="step">U</span><div><h2>用户列表</h2><p>选择日期、调整权限，并为用户随机分配或指定邮箱账号。</p></div></div>
+      <div class="user-search-panel">
+        <label>检索用户账号
+          <input id="userSearchInput" type="search" placeholder="输入用户 ID、绑定邮箱或账号 ID" autocomplete="off">
+        </label>
+        <button id="searchUserBtn" class="primary" type="button">查询</button>
+        <button id="clearUserSearchBtn" type="button">清空</button>
+        <span id="userSearchCount" class="search-count">正在加载…</span>
+      </div>
+      <div id="userRows" class="user-card-list"><div class="empty-state">正在加载…</div></div>
+      <div id="userSearchEmpty" class="empty-state" hidden>没有找到符合条件的用户</div>
+    </section>
+
+    <div id="userPasswordResetModal" class="modal-backdrop" hidden>
+      <section class="confirm-modal password-reset-modal" role="dialog" aria-modal="true" aria-labelledby="userPasswordResetTitle">
+        <div class="confirm-modal-icon">🔑</div>
+        <h2 id="userPasswordResetTitle">重置用户密码</h2>
+        <p id="userPasswordResetDescription" class="confirm-modal-text">正在为 <strong id="userPasswordResetAccount"></strong> 设置新的登录密码。提交后该账号的所有旧登录会话会立即失效。</p>
+        <div class="password-reset-fields">
+          <label>新密码<input id="userResetPassword" type="password" autocomplete="new-password" placeholder="至少 8 位，不能包含中文和空格"></label>
+          <label>确认新密码<input id="userResetConfirmPassword" type="password" autocomplete="new-password" placeholder="再次输入新密码"></label>
+          <label id="userResetAdminPasswordField">当前管理员密码<input id="userResetAdminPassword" type="password" autocomplete="current-password" placeholder="用于确认管理员身份"></label>
+          <label id="userResetConfirmationField">防误触确认词<input id="userResetConfirmation" autocomplete="off" placeholder="请输入：确认重置"></label>
+        </div>
+        <p id="userPasswordResetResult" class="result"></p>
+        <div class="confirm-modal-actions"><button id="cancelUserPasswordReset" type="button">取消</button><button id="submitUserPasswordReset" type="button" class="primary">确认重置密码</button></div>
+      </section>
+    </div>
+  </main>
+  <script src="/auth-storage.js"></script>
+  <script src="/admin-auth.js"></script>
+  <script src="/admin-users.js?v=20260930-5"></script>
+</body>
+</html>

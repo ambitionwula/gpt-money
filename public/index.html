@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>共享拼单平台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <p class="eyebrow">LOCAL CONTROL PANEL</p>
+        <h1>共享拼单平台</h1>
+        <div class="auth-status"><span id="authUserLabel">未登录</span><a id="authLoginLink" href="/auth.html">注册 / 登录</a><a id="profileLink" class="button-link" href="/profile.html" hidden>个人信息</a><button id="authLogoutBtn" type="button" hidden>退出登录</button></div>
+      </div>
+      <span id="healthBadge" class="badge pending">检测服务中</span>
+    </header>
+    <button id="announcementFloatBtn" class="announcement-float-btn" type="button" hidden aria-label="打开公告"><span class="announcement-float-icon">!</span><span>公告</span><b id="announcementCount">0</b></button>
+    <section id="announcementPanel" class="announcement-panel" hidden aria-label="系统公告" role="dialog" aria-modal="false">
+      <div class="announcement-panel-head"><div><strong>系统公告</strong><small>重要通知与服务说明</small></div><button id="closeAnnouncementBtn" type="button" aria-label="关闭公告">×</button></div>
+      <div id="announcementList" class="announcement-list"></div>
+    </section>
+
+    <nav id="userPageNav" class="user-page-nav" aria-label="用户页面切换">
+      <a href="/" class="user-page-nav-link active">账户与验证码</a>
+      <a href="/payment.html" class="user-page-nav-link">套餐与支付</a>
+    </nav>
+
+    <div id="userView">
+    <section class="card">
+      <div class="section-title"><span class="step">1</span><div><h2>账户与邮箱</h2><p>当前登录账号及已分配的邮箱资源。</p></div></div>
+      <div class="assignment-panel"><strong id="assignmentStatus">检测中…</strong></div>
+      <div class="account-usage-notice">
+        <div class="account-usage-notice-title"><span>!</span><strong>账号使用须知</strong></div>
+        <p>当前邮箱账号仅限本人使用，禁止转借、共享或提供给他人。因转借、共享导致的账号封禁、验证码泄露、登录异常或其他损失，由用户自行承担。</p>
+        <label class="account-usage-check"><input id="accountUsageAcknowledged" type="checkbox"><span>我已阅读并同意以上使用规则</span></label>
+      </div>
+      <div id="assignmentPicker" class="assignment-picker" hidden>
+        <div class="assignment-picker-head"><strong>选择当前使用账号</strong><span id="assignmentCount" class="muted-inline"></span></div>
+        <div id="accountChoices" class="account-choices"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><span class="step">2</span><div><h2>获取登录验证码</h2><p>用于获取登录所需的邮箱验证码。如无法正常登录，可联系客服申请开通“获取账号密码”功能。</p></div></div>
+      <div class="otp-panel"><div id="otpState" class="state">尚未创建验证码请求</div><div class="otp-code-area"><div id="otpCode" class="otp-code">——</div><button id="toggleOtpVisibilityBtn" type="button" class="otp-visibility-btn" hidden>隐藏验证码</button></div></div>
+      <div class="actions"><button id="requestBtn" class="primary">开始获取验证码</button><button id="cancelRequestBtn" disabled>取消等待</button><button id="consumeBtn" disabled>返回并消费验证码</button></div>
+      <p id="otpResult" class="result"></p>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><span class="step">3</span><div><h2>获取账号密码</h2><p>管理员开通权限后，可在这里获取当前所选邮箱账号的登录密码。</p></div></div>
+      <div class="actions"><button id="getCredentialsBtn" type="button" hidden>获取账号密码</button></div>
+      <p class="credential-access-note">如需使用，请联系客服让管理员帮你开通权限。</p>
+      <p id="assignmentResult" class="result"></p>
+      <div id="credentialsPanel" class="credentials-panel" hidden></div>
+    </section>
+    </div>
+
+    <div id="adminView" hidden>
+      <section class="card admin-launch">
+        <div class="section-title"><span class="step">A</span><div><h2>管理员功能</h2><p>选择需要管理的内容，将进入独立页面进行编辑。</p></div></div>
+        <div class="admin-launch-grid">
+          <a id="adminUsersTab" class="admin-launch-card" href="/admin-users.html"><strong>用户管理</strong><span>管理付费状态、到期时间、账号权限和邮箱分配</span><b>进入管理 →</b></a>
+          <a id="adminAccountsTab" class="admin-launch-card" href="/admin-accounts.html"><strong>邮箱账号池</strong><span>添加邮箱账号、设置容量并管理启用状态</span><b>进入管理 →</b></a>
+          <a id="adminPlansTab" class="admin-launch-card" href="/admin-plans.html"><strong>付费套餐</strong><span>配置共享人数、套餐价格和有效周期</span><b>进入管理 →</b></a>
+          <a id="adminPaymentTab" class="admin-launch-card" href="/admin-payment.html"><strong>支付管理</strong><span>配置支付网关、回调地址和商户信息</span><b>进入管理 →</b></a>
+          <a id="adminOrdersTab" class="admin-launch-card" href="/admin-orders.html"><strong>订单管理</strong><span>查看订单、确认到账和处理异常订单</span><b>进入管理 →</b></a>
+          <a id="adminAnnouncementsTab" class="admin-launch-card" href="/admin-announcements.html"><strong>公告管理</strong><span>发布前端用户可见的系统公告</span><b>进入管理 →</b></a>
+          <a id="adminSupportTab" class="admin-launch-card" href="/admin-support.html"><strong>客服中心</strong><span>处理用户工单、人工恢复订阅并配置 GPT 客服</span><b>进入管理 →</b></a>
+        </div>
+      </section>
+
+      <div id="adminAccountsPage" hidden>
+      <section class="card">
+        <div class="section-title"><span class="step">B</span><div><h2>管理员账号池</h2><p>管理员提供邮箱和授权码，并设置一个账号最多分配给多少用户。</p></div></div>
+        <div class="grid three">
+          <label>邮箱<input id="managedEmail" type="email" placeholder="admin-box@163.com"></label>
+          <label>客户端授权码<input id="managedPassword" type="password" placeholder="仅管理员输入" autocomplete="off"></label>
+          <label>最大用户数<input id="managedMaxUsers" type="number" min="1" value="3"></label>
+        </div>
+        <div class="actions"><button id="addManagedBtn" class="primary">添加账号到池</button><button id="refreshAccountsBtn">刷新账号池</button></div>
+        <p id="accountResult" class="result"></p>
+        <div class="table-wrap"><table><thead><tr><th>邮箱</th><th>已分配/上限</th><th>状态</th><th>操作</th></tr></thead><tbody id="accountRows"><tr><td colspan="4">正在加载…</td></tr></tbody></table></div>
+      </section>
+      </div>
+
+      <div id="adminUsersPage" hidden>
+      <section class="card">
+        <div class="section-title"><span class="step">A</span><div><h2>用户管理</h2><p>创建用户，并管理付费状态、到期时间、账号数量权限和邮箱分配。</p></div></div>
+        <div class="grid two admin-create">
+          <label>新用户 ID<input id="newUserId" placeholder="例如 user-1001" autocomplete="off"></label>
+          <label class="check"><input id="newUserPaid" type="checkbox"><span>创建为付费用户</span></label>
+        </div>
+        <div class="actions"><button id="createUserBtn" class="primary">创建用户</button><button id="refreshAdminBtn">刷新列表</button></div>
+        <p id="adminResult" class="result"></p>
+      </section>
+
+      <section class="card">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>用户</th><th>角色</th><th>付费状态</th><th>账号权限</th><th>已分配账号</th><th>请求数</th><th>操作</th></tr></thead>
+            <tbody id="userRows"><tr><td colspan="7">正在加载…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+      </div>
+    </div>
+
+  </main>
+  <button id="supportFloatBtn" class="support-float-btn" type="button" aria-label="客服"><span class="support-float-icon">?</span><span class="support-float-label">客服</span></button>
+  <section id="supportChatPanel" class="support-chat-panel" hidden aria-label="客服对话">
+    <div class="support-chat-head"><div><strong>在线客服</strong><small>账号、订阅、验证码问题都可以咨询</small></div><button id="closeSupportChatBtn" type="button" aria-label="关闭客服">×</button></div>
+    <div id="supportTicketList" class="support-chat-body"><div class="empty-inline">正在加载客服对话…</div></div>
+    <div id="supportNewTicketFields" class="support-new-ticket-fields"><input id="supportSubject" maxlength="80" placeholder="问题标题，例如：订阅无法恢复"><textarea id="supportContent" maxlength="3000" rows="3" placeholder="请输入你遇到的问题"></textarea></div>
+    <div class="support-chat-compose"><textarea id="supportReplyContent" maxlength="3000" rows="2" placeholder="输入消息，可直接粘贴截图…"></textarea><div class="support-compose-actions"><label class="support-image-btn" title="选择或粘贴图片">📷<input id="supportImageInput" type="file" accept="image/jpeg,image/png,image/gif,image/webp" hidden></label><button id="sendSupportMessageBtn" class="primary" type="button">发送</button></div></div>
+    <div id="supportImagePreview" class="support-image-preview" hidden></div>
+    <p id="supportResult" class="result"></p>
+  </section>
+  <div id="paymentConfirmModal" class="modal-backdrop" hidden>
+    <div class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="paymentConfirmTitle">
+      <div class="confirm-modal-icon">$</div>
+      <h2 id="paymentConfirmTitle">确认创建套餐订单</h2>
+      <p id="paymentConfirmText" class="confirm-modal-text"></p>
+      <div class="confirm-modal-actions">
+        <button id="cancelPaymentConfirmBtn" type="button">取消</button>
+        <button id="confirmPaymentBtn" type="button" class="primary">确认创建订单</button>
+      </div>
+    </div>
+  </div>
+  <div id="accountUsageModal" class="modal-backdrop" hidden>
+    <div class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="accountUsageModalTitle">
+      <div class="confirm-modal-icon">!</div>
+      <h2 id="accountUsageModalTitle">请先确认账号使用须知</h2>
+      <p class="confirm-modal-text">当前邮箱账号仅限本人使用，禁止转借、共享或提供给他人。因转借、共享导致的账号封禁、验证码泄露、登录异常或其他损失，由用户自行承担。</p>
+      <div class="confirm-modal-actions"><button id="cancelAccountUsageBtn" type="button">返回查看</button><button id="confirmAccountUsageBtn" type="button" class="primary">我已阅读并同意</button></div>
+    </div>
+  </div>
+  <div id="credentialsConfirmModal" class="modal-backdrop" hidden>
+    <div class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="credentialsConfirmTitle">
+      <div class="confirm-modal-icon">!</div>
+      <h2 id="credentialsConfirmTitle">确认获取账号密码</h2>
+      <p class="confirm-modal-text">账号密码属于敏感信息，仅在管理员授权后显示。确认继续获取当前分配邮箱的登录账号和邮箱登录密码吗？</p>
+      <div class="confirm-modal-actions"><button id="cancelCredentialsBtn" type="button">取消</button><button id="confirmCredentialsBtn" type="button" class="primary">确认获取</button></div>
+    </div>
+  </div>
+  <div id="otpConfirmModal" class="modal-backdrop" hidden>
+    <div class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="otpConfirmTitle">
+      <div class="confirm-modal-icon">!</div>
+      <h2 id="otpConfirmTitle">确认开始获取验证码</h2>
+      <p id="otpConfirmText" class="confirm-modal-text"></p>
+      <div class="confirm-modal-actions">
+        <button id="cancelOtpConfirmBtn" type="button">取消</button>
+        <button id="confirmOtpBtn" type="button" class="primary">确认开始</button>
+      </div>
+    </div>
+  </div>
+  <script src="/auth-storage.js"></script>
+  <script src="/app.js?v=20260930-8"></script>
+  <script src="/support.js"></script>
+</body>
+</html>

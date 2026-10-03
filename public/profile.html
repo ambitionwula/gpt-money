@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>个人信息 - 共享拼单平台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell profile-shell">
+    <header>
+      <div>
+        <p class="eyebrow">LOCAL CONTROL PANEL</p>
+        <h1>个人信息</h1>
+        <div class="auth-status"><span id="authUserLabel">加载中…</span><a class="button-link" href="/">返回账户与验证码</a><button id="authLogoutBtn" type="button">退出登录</button></div>
+      </div>
+      <span class="badge yes">账户设置</span>
+    </header>
+
+    <nav class="user-page-nav" aria-label="用户页面切换">
+      <a href="/profile.html" class="user-page-nav-link active">个人信息</a>
+    </nav>
+
+    <section class="card profile-card">
+      <div class="section-title"><span class="step">U</span><div><h2>个人信息</h2><p>账号不可修改，你可以在这里修改自己的登录密码。</p></div></div>
+      <form id="profileForm" class="profile-form">
+        <label>登录账号<input id="profileAccount" readonly autocomplete="username"></label>
+        <div class="grid two">
+          <label>当前密码<input id="currentPassword" type="password" autocomplete="current-password" required></label>
+          <label>新密码<input id="newPassword" type="password" autocomplete="new-password" minlength="8" required></label>
+        </div>
+        <label>确认新密码<input id="confirmNewPassword" type="password" autocomplete="new-password" minlength="8" required></label>
+        <p class="auth-help">新密码至少 8 位，只能使用英文、数字或符号，不能包含中文和空格，并区分大小写。</p>
+        <div class="actions"><button id="savePasswordBtn" class="primary" type="submit">保存新密码</button></div>
+        <p id="profileResult" class="result"></p>
+      </form>
+    </section>
+  </main>
+  <script src="/auth-storage.js"></script>
+  <script src="/profile.js?v=20260929-1"></script>
+</body>
+</html>

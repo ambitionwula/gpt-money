@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>客服中心 - 共享拼单平台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div><p class="eyebrow">ADMIN CONSOLE</p><h1>客服中心</h1><p class="muted">处理用户问题并管理自动 AI 客服回复；订阅恢复仅限主管理员。</p></div>
+    </header>
+    <nav class="admin-subnav" aria-label="管理员功能切换">
+      <a class="admin-subtab" href="/admin-users.html">用户管理</a>
+      <a class="admin-subtab" href="/admin-accounts.html">邮箱账号池</a>
+      <a class="admin-subtab" href="/admin-plans.html">付费套餐</a>
+      <a class="admin-subtab" href="/admin-payment.html">支付管理</a>
+      <a class="admin-subtab" href="/admin-orders.html">订单管理</a>
+      <a class="admin-subtab" href="/admin-announcements.html">公告管理</a>
+      <a class="admin-subtab active" href="/admin-support.html">客服中心</a>
+    </nav>
+
+    <section class="card">
+      <div class="section-title"><span class="step">AI</span><div><h2>第三方 GPT 客服配置</h2><p>兼容 OpenAI Chat Completions 接口的服务，例如自建网关或其它第三方模型平台。</p></div></div>
+      <div class="grid three support-ai-grid">
+        <label>接口地址<input id="supportAiBaseUrl" type="url" placeholder="https://api.example.com/v1"></label>
+        <label>模型名称<input id="supportAiModel" placeholder="例如 gpt-4o-mini"><select id="supportAiModelSelect" aria-label="选择已检测模型" hidden></select></label>
+        <label>API Key<input id="supportAiKey" type="password" placeholder="首次配置必填，已配置后可留空"></label>
+      </div>
+      <label class="check support-ai-active"><input id="supportAiActive" type="checkbox"><span>启用 AI 自动文字回复（AI 只回复，不执行后台操作）</span></label>
+      <div class="actions"><button id="detectSupportModelsBtn">检测可用模型</button><button id="saveSupportAiBtn" class="primary">保存 AI 配置</button><button id="testSupportAiBtn">测试当前模型</button></div>
+      <p id="supportAiResult" class="result"></p>
+    </section>
+
+    <section class="card">
+      <div class="section-title"><span class="step">S</span><div><h2>客服工单</h2><p>AI 会自动回复用户问题；无法判断时会提示用户等待管理员，人工客服仍可继续处理。</p></div></div>
+      <div class="support-admin-layout">
+        <div id="adminSupportTickets" class="support-admin-tickets"><div class="empty-inline">正在加载工单…</div></div>
+        <div id="adminSupportDetail" class="support-admin-detail"><div class="empty-state">请选择左侧工单</div></div>
+      </div>
+    </section>
+  </main>
+  <script src="/auth-storage.js"></script>
+  <script src="/admin-auth.js"></script>
+  <script src="/admin-support.js"></script>
+</body>
+</html>

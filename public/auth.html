@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>注册 / 登录 - 共享拼单平台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="auth-shell">
+    <section class="auth-card">
+      <div class="auth-brand"><p class="eyebrow">SECURE ACCOUNT CENTER</p><h1>共享拼单平台</h1><p>登录后管理套餐、邮箱账号和验证码服务。</p></div>
+      <div class="auth-tabs" role="tablist"><button id="loginTab" class="auth-tab active" type="button">登录</button><button id="registerTab" class="auth-tab" type="button">注册</button></div>
+      <form id="loginForm" class="auth-form">
+        <label>账号<input id="loginAccount" autocomplete="username" placeholder="至少 8 位账号或邮箱" required></label>
+        <label>密码<input id="loginPassword" type="password" autocomplete="current-password" placeholder="区分大小写" required></label>
+        <label class="check auth-remember"><input id="loginRememberMe" type="checkbox" checked><span>记住账号，下次自动登录（30天）</span></label>
+        <button class="primary" type="submit">登录</button>
+      </form>
+      <form id="registerForm" class="auth-form" hidden>
+        <label>账号<input id="registerAccount" autocomplete="username" placeholder="8 位以上数字账号或邮箱" required></label>
+        <p class="auth-help">账号支持 8 位以上阿拉伯数字，或标准邮箱格式；账号不能包含中文。</p>
+        <label>密码<input id="registerPassword" type="password" autocomplete="new-password" placeholder="至少 8 位，区分大小写" required></label>
+        <label>确认密码<input id="registerConfirmPassword" type="password" autocomplete="new-password" placeholder="再次输入密码" required></label>
+          <label class="check auth-remember"><input id="registerRememberMe" type="checkbox" checked><span>记住账号，下次自动登录（30天）</span></label>
+        <p class="auth-help">密码至少 8 位，只能使用英文、数字或符号，不能包含中文和空格。</p>
+        <button class="primary" type="submit">注册并登录</button>
+      </form>
+      <p id="authResult" class="result"></p>
+      <a class="back-link auth-back" href="/">返回首页</a>
+    </section>
+  </main>
+  <script src="/auth-storage.js"></script>
+  <script src="/auth.js?v=20260929-4"></script>
+</body>
+</html>
